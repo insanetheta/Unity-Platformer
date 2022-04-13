@@ -117,11 +117,13 @@ namespace Platformer.Mechanics
                     velocity.y = velocity.y * model.jumpDeceleration;
                 }
             }
-
+            PlayerFlipped playerFlipped = Schedule<PlayerFlipped>();
+            playerFlipped.spriteRenderer = spriteRenderer;
             if (move.x > 0.01f)
-                spriteRenderer.flipX = false;
+                playerFlipped.flipX = false;
             else if (move.x < -0.01f)
-                spriteRenderer.flipX = true;
+                playerFlipped.flipX = true;
+
 
             animator.SetBool("grounded", IsGrounded);
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
